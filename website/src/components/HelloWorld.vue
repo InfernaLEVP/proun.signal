@@ -53,6 +53,32 @@ export default {
 
     addResponseEventListener("auth", myHandleAuthResponse); //eslint-disable-line
 
+	setTimeout(() => {
+		try{
+			if(window.gallery < 1){
+				document.querySelector('#videoPlayOverlay').click();
+				setTimeout(() => {
+					document.querySelector('#videoPlayOverlay').click();
+
+						console.warn('Socket Opened');
+						window.prevW = window.innerWidth;
+
+						setTimeout(() => {
+							setInterval(() => {
+								if(window.prevW !== window.innerWidth){
+									setRes(window.innerWidth, window.innerHeight); //eslint-disable-line
+									window.prevW = window.innerWidth;
+								}
+							}, 1000);
+							setRes(); //eslint-disable-line
+						}, 4000);
+
+				}, 600);
+				window.gallery = 5;
+			}
+		}catch{} 	// eslint-disable-line
+	}, 1400)
+
   }
 
 }

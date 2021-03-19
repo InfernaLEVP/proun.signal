@@ -96,7 +96,7 @@
                 }
 
                 datachannel.onmessage = function (e) {
-                  console.log(`Got message (${label})`, e.data)
+                //   console.log(`Got message (${label})`, e.data)
                   if (self.onDataChannelMessage)
                     self.onDataChannelMessage(e.data);
                 }
@@ -150,7 +150,7 @@
                 //console.log('Printing Stats');
 
                 let newStat = {};
-                console.log('----------------------------- Stats start -----------------------------');
+                // console.log('----------------------------- Stats start -----------------------------');
                 stats.forEach(stat => {
 //                    console.log(JSON.stringify(stat, undefined, 4));
                     if (stat.type == 'inbound-rtp' 

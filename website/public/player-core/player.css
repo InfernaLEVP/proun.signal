@@ -77,7 +77,8 @@ video{
 	position: absolute;
 	padding: 4px;
 	top: 0;
-	right: 2%;
+	right: 40%;
+	transform: translateX(-50%);
 	z-index: 100;
 	border: 2px solid var(--colour4);
 	border-top-width: 0px;

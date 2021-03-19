@@ -37,9 +37,21 @@ import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
+  data() {
+    return {
+      user: undefined, //eslint-disable-line
+      currentResolution: undefined,
+      currentRoom: undefined 
+    }
+  },
+  mounted(){
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const page_location = urlParams.get('destination')
+    setLocation(page_location); //eslint-disable-line
+  },
   components: {
     HelloWorld,
-    user: undefined //eslint-disable-line
   },
   methods: {
     openMenu(){
@@ -74,6 +86,7 @@ export default {
   top: 220px;
   right: 20px;
   z-index: 9999;
+  display: none;
 }
 
 ul{

@@ -217,6 +217,7 @@ function setOverlay(htmlClass, htmlElement, onClickFunction) {
 
 	if (onClickFunction) {
 		videoPlayOverlay.addEventListener('click', function onOverlayClick(event) {
+			window.setTrailerResolution();
 			onClickFunction(event);
 			videoPlayOverlay.removeEventListener('click', onOverlayClick);
 		});
@@ -264,6 +265,7 @@ function showPlayOverlay() {
 		hideOverlay();
 	});
 	shouldShowPlayOverlay = false;
+	
 }
 
 function updateAfkOverlayText() {
@@ -471,7 +473,7 @@ function setupWebRtcPlayer(htmlElement, config) {
 			invalidateFreezeFrameOverlay();
 		} else if (view[0] === ToClientMessageType.VideoEncoderAvgQP) {
 			VideoEncoderQP = new TextDecoder("utf-16").decode(data.slice(1));
-			console.log(`received VideoEncoderAvgQP ${VideoEncoderQP}`);
+			// console.log(`received VideoEncoderAvgQP ${VideoEncoderQP}`);
 		} else {
 			console.error(`unrecognized data received, packet ID ${view[0]}`);
 		}
@@ -787,7 +789,7 @@ function updateVideoStreamSize() {
 			return;
 
 		let descriptor = {
-			Console: 'setres ' + playerElement.clientWidth + 'x' + playerElement.clientHeight
+			Console: 'setres ' + window.innerWidth + 'x' + window.innerHeight
 		};
 		emitUIInteraction(descriptor);
 		console.log(descriptor);
@@ -1550,17 +1552,9 @@ function connect() {
 		return;
 	}
 
-	ws = new WebSocket(window.location.href.replace('http://', 'ws://').replace('https://', 'wss://'));
-
-	// Connection opened
-	ws.addEventListener('open', function (event) {
-		setInterval(() => {
-			
-				setRes(window.innerWidth, window.innerHeight); //eslint-disable-line
-				window.prevW = window.innerWidth;
-			
-		}, 1000);
-	});
+	ws = new WebSocket('http://193.106.172.238'.replace('http://', 'ws://').replace('https://', 'wss://'));
+	// http://193.106.172.238
+	// window.location.href
 
 	ws.onmessage = function (event) {
 		console.log(`<- SS: ${event.data}`);
@@ -1630,17 +1624,63 @@ function load() {
 
 function myHandleAuthResponse(data) {
     console.warn("Response received!");
-    switch (data) {
-      case "auth":
-        console.log('User Auth!');
-        window.app.setUser(data)
-    }
+	
+	const response = JSON.parse(data);
+	window.app.user = response;
+    console.warn(response);
 }
 
 function setRes(width, height) {
+	// let descriptor = {
+	// 	Console: 'r.' + 'setres ' + width + 'x' + height + 'w'
+	// };
 	let descriptor = {
-			Console: 'r.' + 'setres ' + width + 'x' + height + 'w'
+		Console: 'setres ' + window.innerWidth + 'x' + window.innerHeight
 	};
 	emitUIInteraction(descriptor);
 	console.log(descriptor);
+}
+
+function setLocation(destination) {
+	let descriptor = {
+		Location: destination
+	};
+	emitUIInteraction(descriptor);
+	console.log(`teleport to: ${descriptor}`);
+}
+
+window.setTrailerResolution = function (){
+	let con = '0';
+	if(window.innerHeight < window.innerWidth){
+		con = '1';
+	}else{
+		con = '2';
+	}
+	let descriptor = {
+		Connect: con,
+	};
+	emitUIInteraction(descriptor);
+}
+
+function getOS() {
+	var userAgent = window.navigator.userAgent,
+		platform = window.navigator.platform,
+		macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'],
+		windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
+		iosPlatforms = ['iPhone', 'iPad', 'iPod'],
+		os = null;
+  
+	if (macosPlatforms.indexOf(platform) !== -1) {
+	  os = 'Mac OS';
+	} else if (iosPlatforms.indexOf(platform) !== -1) {
+	  os = 'iOS';
+	} else if (windowsPlatforms.indexOf(platform) !== -1) {
+	  os = 'Windows';
+	} else if (/Android/.test(userAgent)) {
+	  os = 'Android';
+	} else if (!os && /Linux/.test(platform)) {
+	  os = 'Linux';
+	}
+  
+	return os;
 }
