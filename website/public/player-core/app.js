@@ -1552,7 +1552,7 @@ function connect() {
 		return;
 	}
 
-	ws = new WebSocket('http://193.106.172.238'.replace('http://', 'ws://').replace('https://', 'wss://'));
+	ws = new WebSocket(window.location.href.replace('http://', 'ws://').replace('https://', 'wss://'));
 	// http://193.106.172.238
 	// window.location.href
 
@@ -1567,6 +1567,9 @@ function connect() {
 			onWebRtcAnswer(msg);
 		} else if (msg.type === 'iceCandidate') {
 			onWebRtcIce(msg.candidate);
+		} else if (msg.type === 'Location') {
+			console.log('LOCATION UPDATE: ' + msg);
+			updateURL(msg.Location)
 		} else {
 			console.log(`invalid SS message type: ${msg.type}`);
 		}
@@ -1683,4 +1686,11 @@ function getOS() {
 	}
   
 	return os;
+}
+
+function updateURL(loc) {
+	if (history.pushState) {
+		var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?Location=' + loc;
+		window.history.pushState({path:newurl},'',newurl);
+	}
 }
