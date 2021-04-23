@@ -147,5 +147,8 @@ ul{
   background-size: 80%;
   background-position: center top 70px;
 }
+img#playButton{
+  transform: translateY(100%);
+}
 
 </style>
