@@ -240,7 +240,6 @@ function showConnectOverlay() {
 	var startText = document.createElement('div');
 	startText.id = 'playButton';
 	startText.innerHTML = `
-		<img src="/images/ProunLogoWhite.svg" style="width: 50%; margin-bottom: 130px;">
 		<img id="playButton" src="/images/player-play.svg" alt="Start Streaming">
 	`;
 

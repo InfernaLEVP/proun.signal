@@ -141,5 +141,11 @@ ul{
   flex-direction: column;
   align-items: center;
 }
+#videoPlayerOverlay{
+  background: #000 url(/images/ProunLogoWhite.svg);
+  background-repeat: no-repeat;
+  background-size: 80%;
+  background-position: center top 70px;
+}
 
 </style>
