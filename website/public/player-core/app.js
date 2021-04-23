@@ -217,9 +217,9 @@ function setOverlay(htmlClass, htmlElement, onClickFunction) {
 
 	if (onClickFunction) {
 		videoPlayOverlay.addEventListener('click', function onOverlayClick(event) {
-			if(window.oClicks >= 1){
-				document.getElementById('preload').style.opacity = '0';
-			}
+			// if(window.oClicks >= 1){
+			// 	document.getElementById('preload').style.opacity = '0';
+			// }
 			window.oClicks += 1;
 			window.setTrailerResolution();
 			onClickFunction(event);
