@@ -73,7 +73,7 @@ export default {
 									window.prevW = window.innerWidth;
 								}
 							}, 1000);
-							setRes(); //eslint-disable-line
+							setRes(window.innerWidth, window.innerHeight); //eslint-disable-line
 						}, 4000);
 
 				}, 600);

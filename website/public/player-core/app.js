@@ -1656,7 +1656,7 @@ function setRes(width, height) {
 	// 	Console: 'r.' + 'setres ' + width + 'x' + height + 'w'
 	// };
 	let descriptor = {
-		Console: 'setres ' + window.innerWidth + 'x' + window.innerHeight
+		Console: 'setres ' + width + 'x' + height
 	};
 	emitUIInteraction(descriptor);
 	console.log(descriptor);
