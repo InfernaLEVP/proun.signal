@@ -217,6 +217,10 @@ function setOverlay(htmlClass, htmlElement, onClickFunction) {
 
 	if (onClickFunction) {
 		videoPlayOverlay.addEventListener('click', function onOverlayClick(event) {
+			if(window.oClicks >= 1){
+				document.getElementById('preload').style.opacity = '0';
+			}
+			window.oClicks += 1;
 			window.setTrailerResolution();
 			onClickFunction(event);
 			videoPlayOverlay.removeEventListener('click', onOverlayClick);
@@ -235,7 +239,10 @@ function setOverlay(htmlClass, htmlElement, onClickFunction) {
 function showConnectOverlay() {
 	var startText = document.createElement('div');
 	startText.id = 'playButton';
-	startText.innerHTML = 'Click to start';
+	startText.innerHTML = `
+		<img src="/images/ProunLogoWhite.svg" style="width: 50%; margin-bottom: 130px;">
+		<img id="playButton" src="/images/player-play.svg" alt="Start Streaming">
+	`;
 
 	setOverlay('clickableState', startText, event => {
 		connect();
@@ -253,7 +260,7 @@ function showTextOverlay(text) {
 function showPlayOverlay() {
 	var img = document.createElement('img');
 	img.id = 'playButton';
-	img.src = '/images/Play.png';
+	img.src = '/images/player-play.svg';
 	img.alt = 'Start Streaming';
 	setOverlay('clickableState', img, event => {
 		if (webRtcPlayerObj)
@@ -334,11 +341,11 @@ function resetAfkWarningTimer() {
 function createWebRtcOffer() {
 	if (webRtcPlayerObj) {
 		console.log('Creating offer');
-		showTextOverlay('Starting connection to server, please wait');
+		// showTextOverlay('Starting connection to server, please wait');
 		webRtcPlayerObj.createOffer();
 	} else {
 		console.log('WebRTC player not setup, cannot create offer');
-		showTextOverlay('Unable to setup video');
+		// showTextOverlay('Unable to setup video');
 	}
 }
 
@@ -400,7 +407,7 @@ function setupWebRtcPlayer(htmlElement, config) {
 
 	webRtcPlayerObj.onDataChannelConnected = function () {
 		if (ws && ws.readyState === WS_OPEN_STATE) {
-			showTextOverlay('WebRTC connected, waiting for video');
+			// showTextOverlay('WebRTC connected, waiting for video');
 		}
 	};
 
@@ -1592,7 +1599,7 @@ function connect() {
 			webRtcPlayerObj = undefined;
 		}
 
-		showTextOverlay(`Disconnected: ${event.reason}`);
+		// showTextOverlay(`Disconnected: ${event.reason}`);
 		var reclickToStart = setTimeout(start, 4000);
 	};
 }
@@ -1630,6 +1637,18 @@ function myHandleAuthResponse(data) {
 	
 	const response = JSON.parse(data);
 	window.app.user = response;
+    console.warn(response);
+}
+
+function myHandleLocationResponse(data) {
+	console.warn("Location changed!");
+	
+	const response = JSON.parse(data);
+	
+	const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    urlParams.set('location', data.Location);
+
     console.warn(response);
 }
 

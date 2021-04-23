@@ -5,17 +5,56 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <title>Proun</title>
 
     <script>
       window.gallery = 0;
+      window.oClicks = 0;
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
     <link rel="stylesheet" href="./player-core/player.css">
     <script type="text/javascript" src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
     <script type="text/javascript" src="./player-core/webRtcPlayer.js"></script>
     <script type="text/javascript" src="./player-core/app.js"></script>
   </head>
   <body>
+    <div class="loadContainer" id="loadContainer">
+      <div class="loader" id="loader"></div>
+    </div>
+
+    <script>
+      function loaderSpinner() {
+          window.addEventListener('DOMContentLoaded', () => {
+
+              const iWidth = window.innerWidth;
+              const iHeight = window.innerHeight;
+
+              const preloader = gsap.timeline({paused: false});
+              preloader.to("#loader", {width: iWidth / 3, duration: 1.2}, "half");
+              preloader.to("#loader", {width: iWidth, left: 0, duration: 0.85});
+              // preloader.to("#loader", {left: 0, duration: 1}, ">-0.9");
+              preloader.to("#loader", {height: iHeight, background: '#C4C4C4', duration: 1});
+              preloader.to("#loadContainer", {opacity: 0, pointerEvents: 'none', duration: 0.6, delay: 0.4});
+
+          });
+      }
+
+      loaderSpinner();
+    </script>
+    
+    <!-- <div id="preload">
+      <img src="/images/ProunLogoWhite.svg" style="width: 50%">
+    </div> -->
+
+    <script>
+      let cooldown = 120;
+      const accordeon = document.querySelectorAll('.accordeon .slice');
+      for(let i = 0; i < accordeon.length; i++){ 
+        setTimeout(() => {
+          accordeon[i].style.animation = 'SliceHeight .3s  infinite linear';
+        }, cooldown*i);
+      }
+    </script>
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>

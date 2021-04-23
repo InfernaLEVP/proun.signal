@@ -39,6 +39,9 @@
 				</div>
 			</div>
 		</div>
+		<div class="logo">
+			<img src="/images/ProunLogoWhite.svg" alt="">
+		</div>
 	</div>
 </template>
 
@@ -52,15 +55,15 @@ export default {
     load() //eslint-disable-line
 
     addResponseEventListener("auth", myHandleAuthResponse); //eslint-disable-line
+	addResponseEventListener("locationChange", myHandleLocationResponse); //eslint-disable-line
 
 	setTimeout(() => {
 		try{
 			if(window.gallery < 1){
 				document.querySelector('#videoPlayOverlay').click();
-				setTimeout(() => {
-					document.querySelector('#videoPlayOverlay').click();
 
-						console.warn('Socket Opened');
+				setTimeout(() => {
+
 						window.prevW = window.innerWidth;
 
 						setTimeout(() => {
@@ -77,7 +80,7 @@ export default {
 				window.gallery = 5;
 			}
 		}catch{} 	// eslint-disable-line
-	}, 1400)
+	}, 3500)
 
   }
 

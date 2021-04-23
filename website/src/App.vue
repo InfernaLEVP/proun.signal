@@ -29,7 +29,7 @@
       </li>
     </ul>
   </nav>
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <HelloWorld msg="data"/>
 </template>
 
 <script>
@@ -47,7 +47,8 @@ export default {
   mounted(){
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const page_location = urlParams.get('destination')
+    const page_location = urlParams.get('location');
+    console.log(page_location);
     setLocation(page_location); //eslint-disable-line
   },
   components: {
@@ -108,4 +109,37 @@ ul{
 .opened{
   height: 176px;
 }
+
+#playButton{
+  width: 100%;
+}
+#videoPlayOverlay{
+  background: black;
+}
+
+/* Preloader Animation */
+.loadContainer{
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  z-index: 999;
+  transition: opacity .25s;
+}
+.loader {
+  height: 10px;
+  width: 2px;
+  background: #fff;
+  position: absolute;
+  transition: opacity .25s;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%); 
+}
+#playButton{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 </style>
