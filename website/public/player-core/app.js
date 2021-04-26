@@ -217,13 +217,17 @@ function setOverlay(htmlClass, htmlElement, onClickFunction) {
 
 	if (onClickFunction) {
 		videoPlayOverlay.addEventListener('click', function onOverlayClick(event) {
-			// if(window.oClicks >= 1){
-			// 	document.getElementById('preload').style.opacity = '0';
-			// }
 			window.oClicks += 1;
 			window.setTrailerResolution();
 			onClickFunction(event);
 			videoPlayOverlay.removeEventListener('click', onOverlayClick);
+
+			const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			const page_location = urlParams.get('location');
+			console.log(page_location);
+			setLocation(page_location.toString()); //eslint-disable-line
+
 		});
 	}
 
@@ -1644,9 +1648,14 @@ function myHandleLocationResponse(data) {
 	
 	const response = JSON.parse(data);
 	
-	const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    urlParams.set('location', data.Location);
+	// Construct URLSearchParams object instance from current URL querystring.
+	var queryParams = new URLSearchParams(window.location.search);
+	
+	// Set new or modify existing parameter value. 
+	queryParams.set("location", response.Location);
+	
+	// Replace current querystring with the new one.
+	history.replaceState(null, null, "?"+queryParams.toString());
 
     console.warn(response);
 }
@@ -1656,7 +1665,7 @@ function setRes(width, height) {
 	// 	Console: 'r.' + 'setres ' + width + 'x' + height + 'w'
 	// };
 	let descriptor = {
-		Console: 'setres ' + width + 'x' + height
+		Console: 'r.' + 'setres ' + width + 'x' + height + 'w'
 	};
 	emitUIInteraction(descriptor);
 	console.log(descriptor);

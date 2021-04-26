@@ -45,11 +45,6 @@ export default {
     }
   },
   mounted(){
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const page_location = urlParams.get('location');
-    console.log(page_location);
-    setLocation(page_location); //eslint-disable-line
   },
   components: {
     HelloWorld,
