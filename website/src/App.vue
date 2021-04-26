@@ -125,7 +125,7 @@ ul{
   transition: opacity .25s;
 }
 .loader {
-  height: 10px;
+  height: 5px;
   width: 0px;
   background: #fff;
   position: absolute;
@@ -142,11 +142,12 @@ ul{
 #videoPlayOverlay{
   background: #000 url(/images/ProunLogoWhite.svg);
   background-repeat: no-repeat;
-  background-size: 80%;
-  background-position: center top 70px;
+  background-size: 62%;
+  background-position: center top 50%;
+  transition: all 0.5s;
 }
 img#playButton{
-  transform: translateY(100%);
+  /* transform: translateY(100%); */
   opacity: var(--btn-opacity);
 }
 

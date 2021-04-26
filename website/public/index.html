@@ -38,6 +38,7 @@
                 let root = document.documentElement;
                 root.style.setProperty('--btn-opacity', 1);
               }});
+              preloader.to('#videoPlayOverlay', {backgroundImage: 'url(/images/play-background.jpg)', backgroundSize: 'cover', duration: 0.1});
               preloader.to("#loadContainer", {opacity: 0, pointerEvents: 'none', duration: 0.6, delay: 0.4});
 
           });
