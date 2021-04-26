@@ -29,6 +29,9 @@
       </li>
     </ul>
   </nav>
+  <div class="pLogo">
+    <img src="/images/ProunLogoWhite.svg" alt="">
+  </div>
   <HelloWorld msg="data"/>
 </template>
 
@@ -78,6 +81,19 @@ export default {
   width: 100%;
   height: 100vh;
   overflow: hidden;
+}
+
+.pLogo{
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  right: 0;
+  z-index: 99;
+  width: 62%;
+  margin: 0 auto;
+  display: flex;
+  pointer-events: none;
 }
 
 .menu{
@@ -140,15 +156,31 @@ ul{
   align-items: center;
 }
 #videoPlayOverlay{
-  background: #000 url(/images/ProunLogoWhite.svg);
+  background: #000;
   background-repeat: no-repeat;
-  background-size: 62%;
-  background-position: center top 50%;
+  background-size: cover;
   transition: all 0.5s;
+  position: relative;
+}
+#videoPlayOverlay:before{
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background: url(/images/play-background.jpg);
+  background-size: cover;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+#videoPlayOverlay.ready:before{
+  opacity: 1;
 }
 img#playButton{
-  /* transform: translateY(100%); */
   opacity: var(--btn-opacity);
+  transition: all 0.4s;
+  transition-delay: 0.5s;
+  z-index: 999;
 }
 
 </style>

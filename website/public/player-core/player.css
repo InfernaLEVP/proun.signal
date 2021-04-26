@@ -89,6 +89,7 @@ video{
 	font-family: var(--buttonFont);
 	font-weight: lighter;
 	color: var(--colour4);
+	background-color: #000;
 }
 
 .overlay-shown > #overlaySettings {

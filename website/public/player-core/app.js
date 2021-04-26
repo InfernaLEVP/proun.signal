@@ -204,6 +204,7 @@ function setOverlay(htmlClass, htmlElement, onClickFunction) {
 		var playerDiv = document.getElementById('player');
 		videoPlayOverlay = document.createElement('div');
 		videoPlayOverlay.id = 'videoPlayOverlay';
+
 		playerDiv.appendChild(videoPlayOverlay);
 	}
 
@@ -232,10 +233,10 @@ function setOverlay(htmlClass, htmlElement, onClickFunction) {
 	}
 
 	// Remove existing html classes so we can set the new one
-	var cl = videoPlayOverlay.classList;
-	for (var i = cl.length - 1; i >= 0; i--) {
-		cl.remove(cl[i]);
-	}
+	// var cl = videoPlayOverlay.classList;
+	// for (var i = cl.length - 1; i >= 0; i--) {
+	// 	cl.remove(cl[i]);
+	// }
 
 	videoPlayOverlay.classList.add(htmlClass);
 }
@@ -265,6 +266,7 @@ function showPlayOverlay() {
 	img.id = 'playButton';
 	img.src = '/images/player-play.svg';
 	img.alt = 'Start Streaming';
+	
 	setOverlay('clickableState', img, event => {
 		if (webRtcPlayerObj)
 			webRtcPlayerObj.video.play();
@@ -274,6 +276,8 @@ function showPlayOverlay() {
 		showFreezeFrameOverlay();
 		hideOverlay();
 	});
+
+
 	shouldShowPlayOverlay = false;
 	
 }
@@ -643,7 +647,7 @@ var inputOptions = {
 	// Browser keys are those which are typically used by the browser UI. We
 	// usually want to suppress these to allow, for example, UE4 to show shader
 	// complexity with the F5 key without the web page refreshing.
-	suppressBrowserKeys: true,
+	suppressBrowserKeys: false,
 
 	// UE4 has a faketouches option which fakes a single finger touch when the
 	// user drags with their mouse. We may perform the reverse; a single finger

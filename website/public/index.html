@@ -30,15 +30,18 @@
               const iHeight = window.innerHeight;
 
               const preloader = gsap.timeline({paused: false});
-              preloader.to("#loader", {width: iWidth / 3, duration: 1.2}, "half");
-              preloader.to("#loader", {width: iWidth, left: 0, duration: 0.85});
+              preloader.to("#loader", {width: iWidth / 3, duration: 0.5}, "half");
+              preloader.to("#loader", {width: iWidth, left: 0, duration: 0.4});
               // preloader.to("#loader", {left: 0, duration: 1}, ">-0.9");
               // preloader.to("#loader", {height: iHeight, background: 'grey', duration: 1});
               preloader.to('img#playButton', {opacity: 1, duration: 0.1, onComplete: () => {
                 let root = document.documentElement;
                 root.style.setProperty('--btn-opacity', 1);
               }});
-              preloader.to('#videoPlayOverlay', {backgroundImage: 'url(/images/play-background.jpg)', backgroundSize: 'cover', duration: 0.1});
+              preloader.to('.pLogo', {opacity: 0, duration: 0.5, onComplete: () => {
+                document.getElementById('videoPlayOverlay').classList.add('ready');
+              }});;
+              preloader.to('#videoPlayOverlay', {opacity: 1, duration: 0.1});
               preloader.to("#loadContainer", {opacity: 0, pointerEvents: 'none', duration: 0.6, delay: 0.4});
 
           });
