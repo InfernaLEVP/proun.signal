@@ -61,16 +61,19 @@ export default {
 		try{
 			if(window.gallery < 1){
 				document.querySelector('#videoPlayOverlay').click();
+				// setRes(1920, 1080);//eslint-disable-line
 
 				setTimeout(() => {
 
 						window.prevW = window.innerWidth;
+						window.prevH = window.innerHeight;
 
 						setTimeout(() => {
 							setInterval(() => {
-								if(window.prevW !== window.innerWidth){
+								if(window.prevW !== window.innerWidth || window.prevH !== window.innerHeight){
 									setRes(window.innerWidth, window.innerHeight); //eslint-disable-line
 									window.prevW = window.innerWidth;
+									window.prevH = window.innerHeight;
 								}
 							}, 1000);
 							setRes(window.innerWidth, window.innerHeight); //eslint-disable-line

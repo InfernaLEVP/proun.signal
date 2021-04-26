@@ -33,7 +33,11 @@
               preloader.to("#loader", {width: iWidth / 3, duration: 1.2}, "half");
               preloader.to("#loader", {width: iWidth, left: 0, duration: 0.85});
               // preloader.to("#loader", {left: 0, duration: 1}, ">-0.9");
-              preloader.to("#loader", {height: iHeight, background: 'grey', duration: 1});
+              // preloader.to("#loader", {height: iHeight, background: 'grey', duration: 1});
+              preloader.to('img#playButton', {opacity: 1, duration: 0.1, onComplete: () => {
+                let root = document.documentElement;
+                root.style.setProperty('--btn-opacity', 1);
+              }});
               preloader.to("#loadContainer", {opacity: 0, pointerEvents: 'none', duration: 0.6, delay: 0.4});
 
           });

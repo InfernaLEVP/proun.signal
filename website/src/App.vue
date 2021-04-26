@@ -64,6 +64,9 @@ export default {
 </script>
 
 <style>
+:root{
+  --btn-opacity: 0;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -117,19 +120,19 @@ ul{
   position: fixed;
   width: 100vw;
   height: 100vh;
-  background: black;
+  /* background: black; */
   z-index: 999;
   transition: opacity .25s;
 }
 .loader {
   height: 10px;
-  width: 2px;
+  width: 0px;
   background: #fff;
   position: absolute;
-  transition: opacity .25s;
-  top: 50%;
-  left: 50%;
-  transform: translateY(-50%); 
+  /* transition: opacity .25s; */
+  bottom: 0;
+  left: 0;
+  /* transform: translateY(-50%);  */
 }
 #playButton{
   display: flex;
@@ -144,6 +147,7 @@ ul{
 }
 img#playButton{
   transform: translateY(100%);
+  opacity: var(--btn-opacity);
 }
 
 </style>

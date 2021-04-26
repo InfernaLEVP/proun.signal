@@ -1632,12 +1632,9 @@ function load() {
 	setupFreezeFrameOverlay();
 	registerKeyboardEvents();
 	start();
-	console.log('LOAD');
 }
 
 function myHandleAuthResponse(data) {
-    console.warn("Response received!");
-	
 	const response = JSON.parse(data);
 	window.app.user = response;
     console.warn(response);
@@ -1648,13 +1645,8 @@ function myHandleLocationResponse(data) {
 	
 	const response = JSON.parse(data);
 	
-	// Construct URLSearchParams object instance from current URL querystring.
 	var queryParams = new URLSearchParams(window.location.search);
-	
-	// Set new or modify existing parameter value. 
 	queryParams.set("location", response.Location);
-	
-	// Replace current querystring with the new one.
 	history.replaceState(null, null, "?"+queryParams.toString());
 
     console.warn(response);
@@ -1664,6 +1656,14 @@ function setRes(width, height) {
 	// let descriptor = {
 	// 	Console: 'r.' + 'setres ' + width + 'x' + height + 'w'
 	// };
+
+	if(width % 2 != 0){
+		width -= 1;
+	}
+	if(height % 2 != 0){
+		height -= 1;
+	}
+	
 	let descriptor = {
 		Console: 'r.' + 'setres ' + width + 'x' + height + 'w'
 	};
