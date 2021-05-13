@@ -48,7 +48,6 @@ export default {
     }
   },
   mounted(){
-    document.querySelector('.pLogo').style.opacity = '1';
   },
   components: {
     HelloWorld,
@@ -98,11 +97,18 @@ export default {
   pointer-events: none;
   opacity: 0;
 
-  transition: opacity 0.4s;
+  transition: opacity 1.2s;
 }
 .pLogo img{
   max-width: 100%!important;
 }
+@media (max-width: 992px){
+  .pLogo{
+    width: 62%;
+    max-width: initial;
+  }
+}
+
 
 .menu{
   position: absolute;
@@ -194,7 +200,7 @@ ul{
   width: 5%;
 }
 #playButton-image path{
-  transition: fill .25s ease-in;
+  transition: fill .08s ease-in;
 }
 #playButton-image:hover path{
   fill: grey;

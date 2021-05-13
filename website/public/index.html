@@ -26,6 +26,9 @@
       function loaderSpinner() {
           window.addEventListener('DOMContentLoaded', () => {
 
+            document.querySelector('.pLogo').style.opacity = '1';
+
+            setTimeout(() => {
               const iWidth = window.innerWidth;
               const iHeight = window.innerHeight;
 
@@ -37,17 +40,21 @@
               preloader.to('#playButton-image', {opacity: 1, duration: 0.1, onComplete: () => {
                 let root = document.documentElement;
                 root.style.setProperty('--btn-opacity', 1);
+                document.querySelector('.pLogo').style.transition = 'none';
               }});
               preloader.to('.pLogo', {opacity: 0, duration: 0.5, onComplete: () => {
                 document.getElementById('videoPlayOverlay').classList.add('ready');
+                document.querySelector('.pLogo').style.display = 'none';
               }});;
               preloader.to('#videoPlayOverlay', {opacity: 1, duration: 0.1});
               preloader.to("#loadContainer", {opacity: 0, pointerEvents: 'none', duration: 0.6, delay: 0.4});
+            }, 500);
 
           });
       }
 
-      loaderSpinner();
+      loaderSpinner();  
+      
     </script>
     
     <!-- <div id="preload">
