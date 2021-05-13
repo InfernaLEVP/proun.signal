@@ -226,8 +226,11 @@ function setOverlay(htmlClass, htmlElement, onClickFunction) {
 			const queryString = window.location.search;
 			const urlParams = new URLSearchParams(queryString);
 			const page_location = urlParams.get('location');
-			console.log(page_location);
-			setLocation(page_location.toString()); //eslint-disable-line
+			
+			if(page_location){
+				setLocation(page_location.toString()); //eslint-disable-line
+			}
+			
 
 		});
 	}
@@ -239,13 +242,27 @@ function setOverlay(htmlClass, htmlElement, onClickFunction) {
 	// }
 
 	videoPlayOverlay.classList.add(htmlClass);
+
+	if(window.oClicks < 1){
+		try{
+			document.querySelector('#videoPlayOverlay').click();
+		}catch(e){
+			console.warn('Auto start FAILED!');
+			console.log(e);
+		}
+	}
+	
 }
 
 function showConnectOverlay() {
 	var startText = document.createElement('div');
 	startText.id = 'playButton';
 	startText.innerHTML = `
-		<img id="playButton" src="/images/player-play.svg" alt="Start Streaming">
+		<svg id="playButton-image" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;">
+			<g>
+				<path fill="white" d="M26.4,90h45.2C81.2,90,89,82.2,89,72.6V27.4C89,17.8,81.2,10,71.6,10H26.4C16.8,10,9,17.8,9,27.4v45.2   C9,82.2,16.8,90,26.4,90z M34,34.7c0-3.6,3.8-5.9,6.9-4L66.7,46c3,1.8,3,6.3,0,8.1L40.9,69.3c-3.1,1.8-6.9-0.4-6.9-4V34.7z"/>
+			</g>
+		</svg>
 	`;
 
 	setOverlay('clickableState', startText, event => {
@@ -262,12 +279,23 @@ function showTextOverlay(text) {
 }
 
 function showPlayOverlay() {
-	var img = document.createElement('img');
-	img.id = 'playButton';
-	img.src = '/images/player-play.svg';
-	img.alt = 'Start Streaming';
+
+	// var img = document.createElement('img');
+	// img.id = 'playButton';
+	// img.src = '/images/player-play.svg';
+	// img.alt = '';
+
+	var startText = document.createElement('div');
+	startText.id = 'playButton';
+	startText.innerHTML = `
+		<svg id="playButton-image" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;">
+			<g>
+				<path fill="white" d="M26.4,90h45.2C81.2,90,89,82.2,89,72.6V27.4C89,17.8,81.2,10,71.6,10H26.4C16.8,10,9,17.8,9,27.4v45.2   C9,82.2,16.8,90,26.4,90z M34,34.7c0-3.6,3.8-5.9,6.9-4L66.7,46c3,1.8,3,6.3,0,8.1L40.9,69.3c-3.1,1.8-6.9-0.4-6.9-4V34.7z"/>
+			</g>
+		</svg>
+	`;
 	
-	setOverlay('clickableState', img, event => {
+	setOverlay('clickableState', startText, event => {
 		if (webRtcPlayerObj)
 			webRtcPlayerObj.video.play();
 

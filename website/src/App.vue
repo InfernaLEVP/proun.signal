@@ -48,6 +48,7 @@ export default {
     }
   },
   mounted(){
+    document.querySelector('.pLogo').style.opacity = '1';
   },
   components: {
     HelloWorld,
@@ -90,10 +91,17 @@ export default {
   left: 0;
   right: 0;
   z-index: 99;
-  width: 62%;
+  width: 38%;
+  max-width: 38%;
   margin: 0 auto;
   display: flex;
   pointer-events: none;
+  opacity: 0;
+
+  transition: opacity 0.4s;
+}
+.pLogo img{
+  max-width: 100%!important;
 }
 
 .menu{
@@ -176,11 +184,27 @@ ul{
 #videoPlayOverlay.ready:before{
   opacity: 1;
 }
-img#playButton{
+#playButton-image{
   opacity: var(--btn-opacity);
   transition: all 0.4s;
   transition-delay: 0.5s;
   z-index: 999;
+
+  max-width: 241px;
+  width: 5%;
 }
+#playButton-image path{
+  transition: fill .25s ease-in;
+}
+#playButton-image:hover path{
+  fill: grey;
+}
+@media(max-width: 992px) {
+  #playButton-image{
+    max-width: initial;
+    width: 25%;
+  }
+}
+
 
 </style>

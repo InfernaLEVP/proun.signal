@@ -34,7 +34,7 @@
               preloader.to("#loader", {width: iWidth, left: 0, duration: 0.4});
               // preloader.to("#loader", {left: 0, duration: 1}, ">-0.9");
               // preloader.to("#loader", {height: iHeight, background: 'grey', duration: 1});
-              preloader.to('img#playButton', {opacity: 1, duration: 0.1, onComplete: () => {
+              preloader.to('#playButton-image', {opacity: 1, duration: 0.1, onComplete: () => {
                 let root = document.documentElement;
                 root.style.setProperty('--btn-opacity', 1);
               }});

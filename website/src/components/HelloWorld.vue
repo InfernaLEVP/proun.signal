@@ -60,7 +60,8 @@ export default {
 	setTimeout(() => {
 		try{
 			if(window.gallery < 1){
-				document.querySelector('#videoPlayOverlay').click();
+
+				// document.querySelector('#videoPlayOverlay').click();
 				// setRes(1920, 1080);//eslint-disable-line
 
 				setTimeout(() => {

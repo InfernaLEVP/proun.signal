@@ -187,11 +187,6 @@ video{
 	height: auto;
 }
 
-img#playButton{
-	max-width: 241px;
-	width: 5%;
-}
-
 #UIInteraction{
 	position: fixed;
 }
