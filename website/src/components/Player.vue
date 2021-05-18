@@ -3,7 +3,7 @@
 		<div id="player"></div>
 		<div id="overlay" class="overlay">
 			<div>
-				<div id="qualityStatus" class="greyStatus"></div>
+				<div id="qualityStatus" class="greyStatus">●</div>
 				<div id="overlayButton">+</div>
 			</div>
 			<div id="overlaySettings">
@@ -39,30 +39,21 @@
 				</div>
 			</div>
 		</div>
-		<div class="logo">
-			<img src="/images/ProunLogoWhite.svg" alt="">
-		</div>
 	</div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  },
+  name: 'Player',
   mounted() {
-    load() //eslint-disable-line
+    load()
 
-    addResponseEventListener("auth", myHandleAuthResponse); //eslint-disable-line
-	addResponseEventListener("locationChange", myHandleLocationResponse); //eslint-disable-line
+    addResponseEventListener("auth", myHandleAuthResponse);
+	addResponseEventListener("locationChange", myHandleLocationResponse);
 
 	setTimeout(() => {
 		try{
 			if(window.gallery < 1){
-
-				// document.querySelector('#videoPlayOverlay').click();
-				// setRes(1920, 1080);//eslint-disable-line
 
 				setTimeout(() => {
 
@@ -72,26 +63,26 @@ export default {
 						setTimeout(() => {
 							setInterval(() => {
 								if(window.prevW !== window.innerWidth || window.prevH !== window.innerHeight){
-									setRes(window.innerWidth, window.innerHeight); //eslint-disable-line
+									setRes(window.innerWidth, window.innerHeight);
 									window.prevW = window.innerWidth;
 									window.prevH = window.innerHeight;
 								}
 							}, 1000);
-							setRes(window.innerWidth, window.innerHeight); //eslint-disable-line
+							setRes(window.innerWidth, window.innerHeight);
 						}, 4000);
 
 				}, 600);
 				window.gallery = 5;
 			}
-		}catch{} 	// eslint-disable-line
+		}catch(e){
+			console.log(e);
+		}
 	}, 3500)
 
   }
-
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #streamingVideo{
   position: static!important;
